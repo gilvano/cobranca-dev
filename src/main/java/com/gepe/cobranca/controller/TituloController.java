@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gepe.cobranca.model.StatusTitulo;
 import com.gepe.cobranca.model.Titulo;
 import com.gepe.cobranca.repository.Titulos;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/titulos")
@@ -31,18 +32,14 @@ public class TituloController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated Titulo titulo, Errors errors){
-		ModelAndView mv = new ModelAndView("CadastroTitulo");
-
+	public String salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes){
 		if(errors.hasErrors()){
-			return mv;
+			return "CadastroTitulo";
 		}
 				
 		titulos.save(titulo);
-		
-
-		mv.addObject("mensagem", "Título salvo com sucesso!");
-		return mv;
+		attributes.addFlashAttribute("mensagem", "Título salvo com sucesso!");
+		return "redirect:/titulos/novo";
 	}
 
 	@RequestMapping
