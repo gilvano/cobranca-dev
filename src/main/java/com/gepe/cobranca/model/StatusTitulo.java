@@ -3,8 +3,7 @@ package com.gepe.cobranca.model;
 public enum StatusTitulo {
 
 	PENDENTE("Pendente"),
-	RECEBIDO("Recebido"),
-	CANCELADO("Cancelado");
+	RECEBIDO("Recebido");
 	
 	private String descricao;
 	
